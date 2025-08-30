@@ -20,13 +20,11 @@
     </div>
   </div>
   
-  <!-- Mobile Header (visible only on mobile) -->
   <div class="w-full p-4 flex items-center justify-between md:hidden">
-    <!-- Mobile Logo -->
+
     <div class="flex items-center">
       <h1 class="tracking-wider font-bold text-font-primary text-sm">YASAR ARAFATH</h1>
     </div>
-    <!-- Mobile Menu Button -->
     <div class="flex items-center gap-4">
       <Linkedin class="text-font-primary"/>
       <button class="text-font-primary">
