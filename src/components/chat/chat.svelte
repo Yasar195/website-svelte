@@ -26,6 +26,8 @@
         if (message.trim() === "") return;
         try {
             messages = [...messages, { text: message, sender: "user" }];
+            const newMessage = message;
+            message = "";
             await tick();
             scrollToBottom();
 
@@ -34,7 +36,7 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ message: message })
+                body: JSON.stringify({ message: newMessage })
             });
 
             if (!response.ok) {
@@ -52,8 +54,6 @@
         } catch(error) {
             console.error("error sending message: ", error)
         }
-
-        message = "";
     }
 
     function scrollToBottom() {
@@ -74,16 +74,14 @@
                 </button>
             </div>
 
-            <!-- Messages -->
             <div bind:this={chatContainer} class="flex-1 overflow-y-auto p-3 space-y-2">
                 {#each messages as msg}
-                    <p class="p-2 rounded-xl text-sm max-w-[70%] {msg.sender === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-100 self-start'}">
+                    <p class="p-2 rounded-xl text-xs max-w-[70%] {msg.sender === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-100 self-start'}">
                         {msg.text}
                     </p>
                 {/each}
             </div>
 
-            <!-- Input -->
             <div class="p-2 border-t border-font-primary gap-2 w-full flex justify-evenly items-center ">
                 <input
                     type="text"
